@@ -19,7 +19,7 @@ class CreateMahasiswasTable extends Migration
             $table->char('jenkel');
             $table->string('tempat', 50);
             $table->date('tgllahir');
-            $table->string('jurusan', 50);
+            $table->bigint('id_jurusan', 20);
             $table->integer('angkatan');
             $table->timestamps();
         });

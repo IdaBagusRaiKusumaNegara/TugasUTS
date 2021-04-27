@@ -32,10 +32,34 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
+            <a href="{{ route('datadosen') }}" class="nav-link">
+              <i class="nav-icon fas fa-user-tie"></i>
+              <p>
+                Data Dosen
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
             <a href="{{ route('krsmahasiswa') }}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                KRS Mahasiswa
+                Data KRS
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{{ route('datajurusan') }}" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Data Jurusan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{{ route('dataprodi') }}" class="nav-link">
+              <i class="nav-icon fas fa-scroll"></i>
+              <p>
+                Data Prodi
               </p>
             </a>
           </li>

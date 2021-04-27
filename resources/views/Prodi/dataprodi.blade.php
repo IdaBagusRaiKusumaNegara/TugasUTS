@@ -34,7 +34,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Mahasiswa</li>
+              <li class="breadcrumb-item active">Data Prodi</li>
             </ol>
           </div>
         </div>
@@ -46,10 +46,10 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Tabel Mahasiswa</h3>
+            <h3 class="card-title">Tabel Prodi</h3>
               </div>
                <div class="card-tools">
-                <a href="{{ route('createmahasiswa') }}" style="margin-left: 20px; margin-top: 10px;" class="btn btn-success"><i class="fas fa-plus-square"></i> Tambah Data</a>
+                <a href="{{ route('createprodi') }}" style="margin-left: 20px; margin-top: 10px;" class="btn btn-success"><i class="fas fa-plus-square"></i> Tambah Data</a>
                </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -57,29 +57,19 @@
                   <thead>
                   <tr>
                     <th>No.</th>
-                    <th>Nama</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Tempat</th>
-                    <th>Tanggal Lahir</th>
-                    <th> Jurusan </th>
-                    <th>Angkatan</th>
+                    <th>Nama Prodi</th>
                     <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach ($dtMahasiswa as $item)
+                  @foreach ($dtProdi as $item)
                     <tr>
                         <td>{{ $loop->iteration }} </td>
-                        <td>{{ $item->nama }} </td>
-                        <td>{{ $item->jenkel }} </td>
-                        <td>{{ $item->tempat }} </td>
-                        <td> {{ date('d-m-Y',strtotime($item->tgllahir)) }}  </td>
-                        <td>{{ $item->jurusan['nama_jur'] }}</td>
-                        <td> {{ $item->angkatan }} </td>
+                        <td> {{ $item->nama_prodi }} </td>
                         <td>
-                        <a href="{{ url('editmahasiswa', $item->id) }}"><i class="fas fa-edit" style="color: gold;"></i></a> 
+                        <a href="{{ url('editprodi', $item->id) }}"><i class="fas fa-edit" style="color: gold;"></i></a> 
                         |
-                        <a href="{{ url('deletemahasiswa', $item->id) }}"><i class="fas fa-trash" style="color: red;"></i></a>
+                        <a href="{{ url('deleteprodi', $item->id) }}"><i class="fas fa-trash" style="color: red;"></i></a>
                         </td>
                     </tr>
                   @endforeach

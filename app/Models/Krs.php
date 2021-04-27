@@ -11,6 +11,13 @@ class Krs extends Model
     protected $table = "krs";
     protected $primaryKey = "id";
     protected $fillable = [
-        'id', 'mata_kuliah', 'sks', 'prodi', 'smtr', 'dosen'
+        'id', 'mata_kuliah', 'sks', 'id_prodi', 'smtr', 'id_dosen'
     ];
+
+    public function dosen(){
+        return $this->belongsTo('App\Models\Dosen', 'id_dosen');
+    }
+    public function prodi(){
+        return $this->belongsTo('App\Models\Prodi', 'id_prodi');
+    }
 }

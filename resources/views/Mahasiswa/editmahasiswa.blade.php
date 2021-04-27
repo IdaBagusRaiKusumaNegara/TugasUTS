@@ -34,7 +34,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">iN</li>
+              <li class="breadcrumb-item active">Edit Mahasiswa</li>
             </ol>
           </div>
         </div>
@@ -46,7 +46,7 @@
     <!-- Main content -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Edit Data Mahasiswa</h3>
+        <h3 class="card-title">Edit Data Dosen</h3>
       </div>
     <!-- /.card-header -->
     <!-- form start -->
@@ -56,32 +56,62 @@
           <div class="form-group">
             <label >Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan Nama" value="{{ $mhs->nama }}">
+            @foreach($errors->get('nama') as $msg)
+              <p class="text-danger">{{ $msg }}</p>
+            @endforeach
           </div>
           <div class="form-group">
-            <label >Jenis Kelamin</label>
-            <input type="text" class="form-control" id="jenkel" name="jenkel" placeholder="Masukan Jenis Kelamin(L/P)" value="{{ $mhs->jenkel }}">
+            <label>Jenis Kelamin</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio"  id="jenkel" name="jenkel" value="L" {{ $mhs->jenkel == 'L'? 'checked':'' }}>
+                <label class="form-check-label">Laki-Laki</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio"  id="jenkel" name="jenkel" value="P" {{ $mhs->jenkel == 'P'? 'checked':'' }}>
+                <label class="form-check-label">Perempuan</label>
+              </div>
+              @foreach($errors->get('jenkel') as $msg)
+              <p class="text-danger">{{ $msg }}</p>
+              @endforeach
           </div>
           <div class="form-group">
             <label >Tempat</label>
             <input type="text" class="form-control" id="tempat" name="tempat" placeholder="Masukan Tempat Lahir" value="{{ $mhs->tempat }}">
+            @foreach($errors->get('tempat') as $msg)
+              <p class="text-danger">{{ $msg }}</p>
+            @endforeach
           </div>
           <div class="form-group">
             <label >Tanggal Lahir</label>
             <input type="date" class="form-control" id="tgllahir" name="tgllahir" value="{{ $mhs->tgllahir }}">
+            @foreach($errors->get('tgllahir') as $msg)
+              <p class="text-danger">{{ $msg }}</p>
+            @endforeach
           </div>
           <div class="form-group">
             <label >Jurusan</label>
-            <input type="text" class="form-control" id="jurusan" name="jurusan" placeholder="Masukan Jurusan" value="{{ $mhs->jurusan }}">
+            <select class="form-control" id="id_jurusan" name="id_jurusan">
+              <option value="{{ $mhs->id_jurusan }}">{{ $mhs->jurusan->nama_jur }}</option>
+              @foreach ($dtJur as $item)
+                <option value="{{$item->id}}">{{$item->nama_jur}}</option>
+              @endforeach
+            </select>
+            @foreach($errors->get('id_jurusan') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+            @endforeach
           </div>
           <div class="form-group">
             <label >Angkatan</label>
             <input type="text" class="form-control" id="angkatan" name="angkatan" placeholder="Masukan Angkatan" value="{{ $mhs->angkatan }}">
+            @foreach($errors->get('angkatan') as $msg)
+              <p class="text-danger">{{ $msg }}</p>
+            @endforeach
           </div>
           <!-- /.card-body -->
         <div class="card-footer">
           <button type="submit" class="btn btn-primary">Update</button>
         </div>
-      </form>
+    </form>
     </div>
     </div>
     <!-- /.content -->

@@ -29,7 +29,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>KRS MAHASISWA</h1>
+            <h1>SISTEM INFORMASI AKADEMIK</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -71,9 +71,9 @@
                         <td>{{ $loop->iteration }} </td>
                         <td>{{ $item->mata_kuliah }} </td>
                         <td>{{ $item->sks }} </td>
-                        <td>{{ $item->prodi }} </td>
+                        <td>{{ $item->prodi['nama_prodi'] }} </td>
                         <td> {{ $item->smtr }} </td>
-                        <td> {{ $item->dosen }} </td>
+                        <td> {{ $item->dosen['nama_dsn'] }} </td>
                         <td>
                         <a href="{{ url('editkrsmahasiswa', $item->id) }}"><i class="fas fa-edit" style="color: gold;"></i></a> 
                         |

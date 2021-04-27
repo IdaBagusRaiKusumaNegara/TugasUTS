@@ -34,7 +34,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Input Mahasiswa</li>
+              <li class="breadcrumb-item active">Input Dosen</li>
             </ol>
           </div>
         </div>
@@ -46,52 +46,66 @@
     <!-- Main content -->
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Input Data Mahasiswa</h3>
+        <h3 class="card-title">Input Data Dosen</h3>
       </div>
     <!-- /.card-header -->
     <!-- form start -->
     <div class="card-body">
-      <form action="{{ route('simpanmahasiswa') }}" method="post">
+      <form action="{{ route('simpandosen') }}" method="post">
       {{ csrf_field() }}
           <div class="form-group">
-            <label >Nama</label>
-            <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukan Nama">
-            @foreach($errors->get('nama') as $msg)
+            <label >Nama Dosen</label>
+            <input type="text" class="form-control" id="nama_dsn" name="nama_dsn" placeholder="Masukan Nama">
+            @foreach($errors->get('nama_dsn') as $msg)
               <p class="text-danger">{{ $msg }}</p>
             @endforeach
           </div>
           <div class="form-group">
             <label>Jenis Kelamin</label>
               <div class="form-check">
-                <input class="form-check-input" type="radio"  id="jenkel" name="jenkel" value="L">
+                <input class="form-check-input" type="radio"  id="jkl_dsn" name="jkl_dsn" value="L">
                 <label class="form-check-label">Laki-Laki</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio"  id="jenkel" name="jenkel" value="P">
+                <input class="form-check-input" type="radio"  id="jkl_dsn" name="jkl_dsn" value="P">
                 <label class="form-check-label">Perempuan</label>
               </div>
-              @foreach($errors->get('jenkel') as $msg)
+              @foreach($errors->get('jkl_dsn') as $msg)
               <p class="text-danger">{{ $msg }}</p>
               @endforeach
           </div>
           <div class="form-group">
             <label >Tempat</label>
-            <input type="text" class="form-control" id="tempat" name="tempat" placeholder="Masukan Tempat Lahir">
-            @foreach($errors->get('tempat') as $msg)
+            <input type="text" class="form-control" id="tmpt_dsn" name="tmpt_dsn" placeholder="Masukan Tempat Lahir">
+            @foreach($errors->get('tmpt_dsn') as $msg)
               <p class="text-danger">{{ $msg }}</p>
             @endforeach
           </div>
           <div class="form-group">
             <label >Tanggal Lahir</label>
-            <input type="date" class="form-control" id="tgllahir" name="tgllahir">
-            @foreach($errors->get('tgllahir') as $msg)
+            <input type="date" class="form-control" id="tgl_dsn" name="tgl_dsn">
+            @foreach($errors->get('tgl_dsn') as $msg)
               <p class="text-danger">{{ $msg }}</p>
             @endforeach
           </div>
           <div class="form-group">
+            <label>Status Pegawai</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio"  id="status_peg" name="status_peg" value="Aktif">
+                <label class="form-check-label">Aktif</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio"  id="status_peg" name="status_peg" value="Tidak Aktif">
+                <label class="form-check-label">Tidak Aktif</label>
+              </div>
+              @foreach($errors->get('status_peg') as $msg)
+              <p class="text-danger">{{ $msg }}</p>
+              @endforeach
+          </div>
+          <div class="form-group">
             <label >Jurusan</label>
-            <select class="form-control" id="id_jurusan" name="id_jurusan">
-              <option value>
+            <select class="form-control" id="id_jurusan" name="id_jurusan" placeholder="Masukan Jurusan">
+              <option value="">
                 Pilih Jurusan
               </option>
               @foreach ($dtJur as $item)
@@ -100,13 +114,6 @@
             </select>
             @foreach($errors->get('id_jurusan') as $msg)
                 <p class="text-danger">{{ $msg }}</p>
-            @endforeach
-          </div>
-          <div class="form-group">
-            <label >Angkatan</label>
-            <input type="text" class="form-control" id="angkatan" name="angkatan" placeholder="Masukan Angkatan">
-            @foreach($errors->get('angkatan') as $msg)
-              <p class="text-danger">{{ $msg }}</p>
             @endforeach
           </div>
           <!-- /.card-body -->

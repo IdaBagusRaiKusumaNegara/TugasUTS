@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
+use App\Models\Dosen;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
-use App\Http\Requests\MahasiswaRequest;
+use App\Http\Requests\DosenRequest;
 
-class MahasiswaController extends Controller
+class DosenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $dtMahasiswa = Mahasiswa::with('jurusan');
-        $dtMahasiswa = Mahasiswa::all();
-        return view('Mahasiswa.datamahasiswa', compact('dtMahasiswa'));
+        $dtDosen = Dosen::all();
+        return view('Dosen.datadosen', compact('dtDosen'));
     }
 
     /**
@@ -29,7 +28,7 @@ class MahasiswaController extends Controller
     public function create()
     {
         $dtJur = Jurusan::all();
-        return view('Mahasiswa.createmahasiswa', compact('dtJur'));
+        return view('Dosen.createdosen', compact('dtJur'));
     }
 
     /**
@@ -38,18 +37,18 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MahasiswaRequest $request)
+    public function store(DosenRequest $request)
     {
-        Mahasiswa::create([
-            'nama' => $request->nama,
-            'jenkel' => $request->jenkel,
-            'tempat' => $request->tempat,
-            'tgllahir' => $request->tgllahir,
-            'id_jurusan' => $request->id_jurusan,
-            'angkatan' => $request->angkatan,
+        Dosen::create([
+            'nama_dsn' => $request->nama_dsn,
+            'jkl_dsn' => $request->jkl_dsn,
+            'tmpt_dsn' => $request->tmpt_dsn,
+            'tgl_dsn' => $request->tgl_dsn,
+            'status_peg' => $request->status_peg,
+            'id_jurusan' => $request->id_jurusan
         ]);
 
-        return redirect('datamahasiswa')->with('success', 'Data Berhasil Tersimpan');
+        return redirect('datadosen')->with('success', 'Data Berhasil Tersimpan');
     }
 
     /**
@@ -72,8 +71,8 @@ class MahasiswaController extends Controller
     public function edit($id)
     {
         $dtJur = Jurusan::all();
-        $mhs = Mahasiswa::with('jurusan')->findorfail($id);
-        return view('Mahasiswa.editmahasiswa', compact('mhs','dtJur'));
+        $dsn = Dosen::findorfail($id);
+        return view('Dosen.editdosen', compact('dsn', 'dtJur'));
     }
 
     /**
@@ -83,11 +82,11 @@ class MahasiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MahasiswaRequest $request, $id)
+    public function update(DosenRequest $request, $id)
     {
-        $mhs = Mahasiswa::findorfail($id);
-        $mhs->update($request->all());
-        return redirect('datamahasiswa')->with('success', 'Data Berhasil Update');
+        $dsn = Dosen::findorfail($id);
+        $dsn->update($request->all());
+        return redirect('datadosen')->with('success', 'Data Berhasil Update');
     }
 
     /**
@@ -98,8 +97,8 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        $mhs = Mahasiswa::findorfail($id);
-        $mhs->delete();
+        $dsn = Dosen::findorfail($id);
+        $dsn->delete();
         return back()->with('info', 'Data Berhasil Hapus');
     }
 }

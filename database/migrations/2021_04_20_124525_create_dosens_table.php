@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKrsTable extends Migration
+class CreateDosensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateKrsTable extends Migration
      */
     public function up()
     {
-        Schema::create('krs', function (Blueprint $table) {
+        Schema::create('dosens', function (Blueprint $table) {
             $table->id();
-            $table->string('mata_kuliah', 100);
-            $table->integer('sks', 1);
-            $table->string('prodi', 50);
-            $table->integer('smtr', 2);
-            $table->bigint('id_dosen', 20);
+            $table->string('nama_dsn', 100);
+            $table->char('jkl_dsn');
+            $table->string('tmpt_dsn', 50);
+            $table->date('tgl_dsn');
+            $table->string('status_peg', 20);
+            $table->bigint('id_jurusan', 20);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateKrsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('krs');
+        Schema::dropIfExists('dosens');
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
-use App\Http\Requests\MahasiswaRequest;
+use App\Http\Requests\JurusanRequest;
 
-class MahasiswaController extends Controller
+class JurusanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $dtMahasiswa = Mahasiswa::with('jurusan');
-        $dtMahasiswa = Mahasiswa::all();
-        return view('Mahasiswa.datamahasiswa', compact('dtMahasiswa'));
+        $dtJurusan = Jurusan::all();
+        return view('Jurusan.datajurusan', compact('dtJurusan'));
     }
 
     /**
@@ -28,8 +26,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        $dtJur = Jurusan::all();
-        return view('Mahasiswa.createmahasiswa', compact('dtJur'));
+        return view('Jurusan.createjurusan');
     }
 
     /**
@@ -38,18 +35,13 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MahasiswaRequest $request)
+    public function store(JurusanRequest $request)
     {
-        Mahasiswa::create([
-            'nama' => $request->nama,
-            'jenkel' => $request->jenkel,
-            'tempat' => $request->tempat,
-            'tgllahir' => $request->tgllahir,
-            'id_jurusan' => $request->id_jurusan,
-            'angkatan' => $request->angkatan,
+        Jurusan::create([
+            'nama_jur' => $request->nama_jur,
         ]);
 
-        return redirect('datamahasiswa')->with('success', 'Data Berhasil Tersimpan');
+        return redirect('datajurusan')->with('success', 'Data Berhasil Tersimpan');
     }
 
     /**
@@ -71,9 +63,8 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        $dtJur = Jurusan::all();
-        $mhs = Mahasiswa::with('jurusan')->findorfail($id);
-        return view('Mahasiswa.editmahasiswa', compact('mhs','dtJur'));
+        $jrs = Jurusan::findorfail($id);
+        return view('Jurusan.editjurusan', compact('jrs'));
     }
 
     /**
@@ -83,11 +74,11 @@ class MahasiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MahasiswaRequest $request, $id)
+    public function update(JurusanRequest $request, $id)
     {
-        $mhs = Mahasiswa::findorfail($id);
-        $mhs->update($request->all());
-        return redirect('datamahasiswa')->with('success', 'Data Berhasil Update');
+        $jrs = Jurusan::findorfail($id);
+        $jrs->update($request->all());
+        return redirect('datajurusan')->with('success', 'Data Berhasil Update');
     }
 
     /**
@@ -98,8 +89,8 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        $mhs = Mahasiswa::findorfail($id);
-        $mhs->delete();
+        $jrs = Jurusan::findorfail($id);
+        $jrs->delete();
         return back()->with('info', 'Data Berhasil Hapus');
     }
 }

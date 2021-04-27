@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use Illuminate\Http\Request;
 use App\Models\Krs;
+use App\Models\Prodi;
+use App\Http\Requests\KrsRequest;
 
 class KrsController extends Controller
 {
@@ -25,7 +28,9 @@ class KrsController extends Controller
      */
     public function create()
     {
-        return view('Krs.createkrsmahasiswa');
+        $dtDsn = Dosen::all();
+        $dtPrd = Prodi::all();
+        return view('Krs.createkrsmahasiswa', compact('dtDsn','dtPrd'));
     }
 
     /**
@@ -34,14 +39,14 @@ class KrsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KrsRequest $request)
     {
         Krs::create([
             'mata_kuliah' => $request->mata_kuliah,
             'sks' => $request->sks,
-            'prodi' => $request->prodi,
+            'id_prodi' => $request->id_prodi,
             'smtr' => $request->smtr,
-            'dosen' => $request->dosen,
+            'id_dosen' => $request->id_dosen,
         ]);
 
         return redirect('krsmahasiswa')->with('success', 'Data Berhasil Tersimpan');
@@ -66,8 +71,10 @@ class KrsController extends Controller
      */
     public function edit($id)
     {
+        $dtDsn = Dosen::all();
+        $dtPrd = Prodi::all();
         $krs = Krs::findorfail($id);
-        return view('Krs.editkrsmahasiswa', compact('krs'));
+        return view('Krs.editkrsmahasiswa', compact('krs', 'dtDsn','dtPrd'));
     }
 
     /**
@@ -77,7 +84,7 @@ class KrsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(KrsRequest $request, $id)
     {
         $krs = Krs::findorfail($id);
         $krs->update($request->all());

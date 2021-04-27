@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mahasiswa;
-use App\Models\Jurusan;
+use App\Models\Prodi;
 use Illuminate\Http\Request;
-use App\Http\Requests\MahasiswaRequest;
+use App\Http\Requests\ProdiRequest;
 
-class MahasiswaController extends Controller
+class ProdiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $dtMahasiswa = Mahasiswa::with('jurusan');
-        $dtMahasiswa = Mahasiswa::all();
-        return view('Mahasiswa.datamahasiswa', compact('dtMahasiswa'));
+        $dtProdi = Prodi::all();
+        return view('Prodi.dataprodi', compact('dtProdi'));
     }
 
     /**
@@ -28,8 +26,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        $dtJur = Jurusan::all();
-        return view('Mahasiswa.createmahasiswa', compact('dtJur'));
+        return view('Prodi.createprodi');
     }
 
     /**
@@ -38,18 +35,13 @@ class MahasiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MahasiswaRequest $request)
+    public function store(ProdiRequest $request)
     {
-        Mahasiswa::create([
-            'nama' => $request->nama,
-            'jenkel' => $request->jenkel,
-            'tempat' => $request->tempat,
-            'tgllahir' => $request->tgllahir,
-            'id_jurusan' => $request->id_jurusan,
-            'angkatan' => $request->angkatan,
+        Prodi::create([
+            'nama_prodi' => $request->nama_prodi,
         ]);
 
-        return redirect('datamahasiswa')->with('success', 'Data Berhasil Tersimpan');
+        return redirect('dataprodi')->with('success', 'Data Berhasil Tersimpan');
     }
 
     /**
@@ -71,9 +63,8 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        $dtJur = Jurusan::all();
-        $mhs = Mahasiswa::with('jurusan')->findorfail($id);
-        return view('Mahasiswa.editmahasiswa', compact('mhs','dtJur'));
+        $prd = Prodi::findorfail($id);
+        return view('Prodi.editprodi', compact('prd'));
     }
 
     /**
@@ -83,11 +74,11 @@ class MahasiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(MahasiswaRequest $request, $id)
+    public function update(ProdiRequest $request, $id)
     {
-        $mhs = Mahasiswa::findorfail($id);
-        $mhs->update($request->all());
-        return redirect('datamahasiswa')->with('success', 'Data Berhasil Update');
+        $prd = Prodi::findorfail($id);
+        $prd->update($request->all());
+        return redirect('dataprodi')->with('success', 'Data Berhasil Update');
     }
 
     /**
@@ -98,8 +89,8 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        $mhs = Mahasiswa::findorfail($id);
-        $mhs->delete();
+        $prd = Prodi::findorfail($id);
+        $prd->delete();
         return back()->with('info', 'Data Berhasil Hapus');
     }
 }
